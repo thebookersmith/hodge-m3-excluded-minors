@@ -51,7 +51,7 @@ the note's §4: M(K₃,₅), M(G₁), M(G₂) ∈ M₅, each by an explicit solu
 
 ## Contents
 
-- `newminor_note.pdf` — the 7-page note (statements, certificates table, verification details).
+- `newminor_note.pdf` — the note (statements, certificates table, verification details).
 - `m3_excluded_minors_v2/` — the five-find bundle: realizations, dual witnesses, per-minor
   membership witnesses, checker (`m3_check.py`), and the archived reference run
   (`CHECK_OUTPUT.txt`).
