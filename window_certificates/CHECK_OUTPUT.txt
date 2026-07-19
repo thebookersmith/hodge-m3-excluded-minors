@@ -1,0 +1,16 @@
+----------------------------------------------------------------------------------------
+CLAIM: K_{3,9} is NOT in M_5   (Engel-Schreieder Thm 1.7 instance, p=5; witness depth exactly 5 -- depths <= 4 are provably empty)
+  realization rebuilt from edge list (12V/27E): g=11 n=27; matches witness file: YES
+  corank c=16: full system would have 5^16 = 152,587,890,625 vertices (never materialized); window monomials: 20333
+  ring identity (**) for all 27 edges: PASS
+  sum_s b_s = 1 (must be nonzero): PASS
+  => VERIFIED: NOT in M_5 (window Farkas dual)
+----------------------------------------------------------------------------------------
+CLAIM: K_8 is NOT in M_3   (depth-3 window witness at corank 21)
+  realization rebuilt from edge list (8V/28E): g=7 n=28; matches witness file: YES
+  corank c=21: full system would have 3^21 = 10,460,353,203 vertices (never materialized); window monomials: 2003
+  ring identity (**) for all 28 edges: PASS
+  sum_s b_s = 1 (must be nonzero): PASS
+  => VERIFIED: NOT in M_3 (window Farkas dual)
+========================================================================================
+RESULT: PASS

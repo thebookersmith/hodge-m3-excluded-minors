@@ -1,0 +1,426 @@
+{
+ "title": "Excluded minors of the class M_3 (EGFS arXiv:2507.15704v3 Def 8.3): five finds + K_{3,5} anchor",
+ "adjudication": "finds #1/#2 certified 2026-07-15 (original bundle); finds #3/#4/#5 adjudicated and blessed 2026-07-18",
+ "checker": "m3_check.py (python3 + numpy only)",
+ "ell": 3,
+ "finds": [
+  {
+   "name": "find1",
+   "graph6": "H?zTbbo",
+   "description": "K_{4,5} minus perfect matching = Q_3 + one-sided apex; rank 8",
+   "dual": "find1_dual.npz",
+   "minor_scheme": "orbit_representatives",
+   "minors": [
+    {
+     "file": "find1_minor_orbit0_primal.npz",
+     "op": "delete",
+     "orbit_size": 12,
+     "cls": 0
+    },
+    {
+     "file": "find1_minor_orbit1_primal.npz",
+     "op": "contract",
+     "orbit_size": 12,
+     "cls": 1
+    },
+    {
+     "file": "find1_minor_orbit2_primal.npz",
+     "op": "delete",
+     "orbit_size": 4,
+     "cls": 2
+    },
+    {
+     "file": "find1_minor_orbit3_primal.npz",
+     "op": "contract",
+     "orbit_size": 4,
+     "cls": 3
+    }
+   ],
+   "orbit_accounting": {
+    "total_single_element_minors": 32,
+    "note": "16 deletions + 16 contractions dedupe under Aut(G)=S_4 (two edge-orbits: 12 cube-side, 4 apex) x {delete, contract} into exactly 4 isomorphism classes of sizes 12+12+4+4. Testing one representative per class certifies all 32 by symmetry; the fleet also tested all 32 individually (agree)."
+   }
+  },
+  {
+   "name": "find2",
+   "graph6": "J??FCpSJFw?",
+   "description": "subdivided K_4 + apex to the 6 midpoints; rank 10",
+   "dual": "find2_dual.npz",
+   "minor_scheme": "orbit_representatives",
+   "minors": [
+    {
+     "file": "find2_minor_orbit0_primal.npz",
+     "op": "delete",
+     "orbit_size": 12,
+     "cls": 0
+    },
+    {
+     "file": "find2_minor_orbit1_primal.npz",
+     "op": "contract",
+     "orbit_size": 12,
+     "cls": 1
+    },
+    {
+     "file": "find2_minor_orbit2_primal.npz",
+     "op": "delete",
+     "orbit_size": 6,
+     "cls": 2
+    },
+    {
+     "file": "find2_minor_orbit3_primal.npz",
+     "op": "contract",
+     "orbit_size": 6,
+     "cls": 3
+    }
+   ],
+   "orbit_accounting": {
+    "total_single_element_minors": 36,
+    "note": "18 deletions + 18 contractions dedupe under Aut(G)=S_4 (two edge-orbits: 12 subdivision-edges = flags of K4, 6 apex-edges) x {delete, contract} into exactly 4 isomorphism classes of sizes 12+12+6+6. Testing one representative per class certifies all 36 by symmetry."
+   }
+  },
+  {
+   "name": "find3",
+   "graph6": "I?`FF_{F_",
+   "canonical": "I@?LQngt?",
+   "description": "10V/17E rank 9; non-bipartite, non-planar, no base+apex decomposition; Aut C2xC2",
+   "dual": "find3_dual.npz",
+   "minor_scheme": "all_one_element_minors",
+   "minors": [
+    {
+     "file": "find3_minor_con0_primal.npz"
+    },
+    {
+     "file": "find3_minor_con10_primal.npz"
+    },
+    {
+     "file": "find3_minor_con11_primal.npz"
+    },
+    {
+     "file": "find3_minor_con12_primal.npz"
+    },
+    {
+     "file": "find3_minor_con13_primal.npz"
+    },
+    {
+     "file": "find3_minor_con14_primal.npz"
+    },
+    {
+     "file": "find3_minor_con15_primal.npz"
+    },
+    {
+     "file": "find3_minor_con16_primal.npz"
+    },
+    {
+     "file": "find3_minor_con1_primal.npz"
+    },
+    {
+     "file": "find3_minor_con2_primal.npz"
+    },
+    {
+     "file": "find3_minor_con3_primal.npz"
+    },
+    {
+     "file": "find3_minor_con4_primal.npz"
+    },
+    {
+     "file": "find3_minor_con5_primal.npz"
+    },
+    {
+     "file": "find3_minor_con6_primal.npz"
+    },
+    {
+     "file": "find3_minor_con7_primal.npz"
+    },
+    {
+     "file": "find3_minor_con8_primal.npz"
+    },
+    {
+     "file": "find3_minor_con9_primal.npz"
+    },
+    {
+     "file": "find3_minor_del0_primal.npz"
+    },
+    {
+     "file": "find3_minor_del10_primal.npz"
+    },
+    {
+     "file": "find3_minor_del11_primal.npz"
+    },
+    {
+     "file": "find3_minor_del12_primal.npz"
+    },
+    {
+     "file": "find3_minor_del13_primal.npz"
+    },
+    {
+     "file": "find3_minor_del14_primal.npz"
+    },
+    {
+     "file": "find3_minor_del15_primal.npz"
+    },
+    {
+     "file": "find3_minor_del16_primal.npz"
+    },
+    {
+     "file": "find3_minor_del1_primal.npz"
+    },
+    {
+     "file": "find3_minor_del2_primal.npz"
+    },
+    {
+     "file": "find3_minor_del3_primal.npz"
+    },
+    {
+     "file": "find3_minor_del4_primal.npz"
+    },
+    {
+     "file": "find3_minor_del5_primal.npz"
+    },
+    {
+     "file": "find3_minor_del6_primal.npz"
+    },
+    {
+     "file": "find3_minor_del7_primal.npz"
+    },
+    {
+     "file": "find3_minor_del8_primal.npz"
+    },
+    {
+     "file": "find3_minor_del9_primal.npz"
+    }
+   ]
+  },
+  {
+   "name": "find4",
+   "graph6": "I?B@nRWN?",
+   "canonical": "I??[rNoy?",
+   "description": "10V/17E rank 9; non-bipartite, non-planar; Aut C2xC2",
+   "dual": "find4_dual.npz",
+   "minor_scheme": "all_one_element_minors",
+   "minors": [
+    {
+     "file": "find4_minor_con0_primal.npz"
+    },
+    {
+     "file": "find4_minor_con10_primal.npz"
+    },
+    {
+     "file": "find4_minor_con11_primal.npz"
+    },
+    {
+     "file": "find4_minor_con12_primal.npz"
+    },
+    {
+     "file": "find4_minor_con13_primal.npz"
+    },
+    {
+     "file": "find4_minor_con14_primal.npz"
+    },
+    {
+     "file": "find4_minor_con15_primal.npz"
+    },
+    {
+     "file": "find4_minor_con16_primal.npz"
+    },
+    {
+     "file": "find4_minor_con1_primal.npz"
+    },
+    {
+     "file": "find4_minor_con2_primal.npz"
+    },
+    {
+     "file": "find4_minor_con3_primal.npz"
+    },
+    {
+     "file": "find4_minor_con4_primal.npz"
+    },
+    {
+     "file": "find4_minor_con5_primal.npz"
+    },
+    {
+     "file": "find4_minor_con6_primal.npz"
+    },
+    {
+     "file": "find4_minor_con7_primal.npz"
+    },
+    {
+     "file": "find4_minor_con8_primal.npz"
+    },
+    {
+     "file": "find4_minor_con9_primal.npz"
+    },
+    {
+     "file": "find4_minor_del0_primal.npz"
+    },
+    {
+     "file": "find4_minor_del10_primal.npz"
+    },
+    {
+     "file": "find4_minor_del11_primal.npz"
+    },
+    {
+     "file": "find4_minor_del12_primal.npz"
+    },
+    {
+     "file": "find4_minor_del13_primal.npz"
+    },
+    {
+     "file": "find4_minor_del14_primal.npz"
+    },
+    {
+     "file": "find4_minor_del15_primal.npz"
+    },
+    {
+     "file": "find4_minor_del16_primal.npz"
+    },
+    {
+     "file": "find4_minor_del1_primal.npz"
+    },
+    {
+     "file": "find4_minor_del2_primal.npz"
+    },
+    {
+     "file": "find4_minor_del3_primal.npz"
+    },
+    {
+     "file": "find4_minor_del4_primal.npz"
+    },
+    {
+     "file": "find4_minor_del5_primal.npz"
+    },
+    {
+     "file": "find4_minor_del6_primal.npz"
+    },
+    {
+     "file": "find4_minor_del7_primal.npz"
+    },
+    {
+     "file": "find4_minor_del8_primal.npz"
+    },
+    {
+     "file": "find4_minor_del9_primal.npz"
+    }
+   ]
+  },
+  {
+   "name": "find5",
+   "graph6": "ICQf@pSF_",
+   "canonical": "IAGWMUqw_",
+   "description": "10V/17E rank 9; non-bipartite, non-planar; Aut C2",
+   "dual": "find5_dual.npz",
+   "minor_scheme": "all_one_element_minors",
+   "minors": [
+    {
+     "file": "find5_minor_con0_primal.npz"
+    },
+    {
+     "file": "find5_minor_con10_primal.npz"
+    },
+    {
+     "file": "find5_minor_con11_primal.npz"
+    },
+    {
+     "file": "find5_minor_con12_primal.npz"
+    },
+    {
+     "file": "find5_minor_con13_primal.npz"
+    },
+    {
+     "file": "find5_minor_con14_primal.npz"
+    },
+    {
+     "file": "find5_minor_con15_primal.npz"
+    },
+    {
+     "file": "find5_minor_con16_primal.npz"
+    },
+    {
+     "file": "find5_minor_con1_primal.npz"
+    },
+    {
+     "file": "find5_minor_con2_primal.npz"
+    },
+    {
+     "file": "find5_minor_con3_primal.npz"
+    },
+    {
+     "file": "find5_minor_con4_primal.npz"
+    },
+    {
+     "file": "find5_minor_con5_primal.npz"
+    },
+    {
+     "file": "find5_minor_con6_primal.npz"
+    },
+    {
+     "file": "find5_minor_con7_primal.npz"
+    },
+    {
+     "file": "find5_minor_con8_primal.npz"
+    },
+    {
+     "file": "find5_minor_con9_primal.npz"
+    },
+    {
+     "file": "find5_minor_del0_primal.npz"
+    },
+    {
+     "file": "find5_minor_del10_primal.npz"
+    },
+    {
+     "file": "find5_minor_del11_primal.npz"
+    },
+    {
+     "file": "find5_minor_del12_primal.npz"
+    },
+    {
+     "file": "find5_minor_del13_primal.npz"
+    },
+    {
+     "file": "find5_minor_del14_primal.npz"
+    },
+    {
+     "file": "find5_minor_del15_primal.npz"
+    },
+    {
+     "file": "find5_minor_del16_primal.npz"
+    },
+    {
+     "file": "find5_minor_del1_primal.npz"
+    },
+    {
+     "file": "find5_minor_del2_primal.npz"
+    },
+    {
+     "file": "find5_minor_del3_primal.npz"
+    },
+    {
+     "file": "find5_minor_del4_primal.npz"
+    },
+    {
+     "file": "find5_minor_del5_primal.npz"
+    },
+    {
+     "file": "find5_minor_del6_primal.npz"
+    },
+    {
+     "file": "find5_minor_del7_primal.npz"
+    },
+    {
+     "file": "find5_minor_del8_primal.npz"
+    },
+    {
+     "file": "find5_minor_del9_primal.npz"
+    }
+   ]
+  },
+  {
+   "name": "K35_anchor",
+   "graph6": null,
+   "description": "K_{3,5}: the published EGFS excluded minor (their Thm 1.9); dual nonmember witness included as pipeline anchor only",
+   "dual": "K35_anchor_dual.npz",
+   "minor_scheme": "published_reference",
+   "minors": []
+  }
+ ]
+}

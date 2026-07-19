@@ -1,0 +1,39 @@
+========================================================================================
+Excluded minors of the class M_3 (EGFS arXiv:2507.15704v3 Def 8.3): five finds + K_{3,5} anchor
+finds #1/#2 certified 2026-07-15 (original bundle); finds #3/#4/#5 adjudicated and blessed 2026-07-18
+========================================================================================
+
+### find1  graph6=H?zTbbo  [K_{4,5} minus perfect matching = Q_3 + one-sided apex; rank 8]
+  NONMEMBER dual witness: VERIFIED (dual g=8 n=16 c=8 y.rhs=1)
+  minor MEMBER witnesses: 4/4 VERIFIED [orbit_representatives]
+  orbit accounting: {'total_single_element_minors': 32, 'note': '16 deletions + 16 contractions dedupe under Aut(G)=S_4 (two edge-orbits: 12 cube-side, 4 apex) x {delete, contract} into exactly 4 isomorphism classes of sizes 12+12+4+4. Testing one representative per class certifies all 32 by symmetry; the fleet also tested all 32 individually (agree).'}
+  => minor-closedness (Prop 7.2): every proper minor is a member; with the dual witness, this matroid is an EXCLUDED MINOR for M_3.
+
+### find2  graph6=J??FCpSJFw?  [subdivided K_4 + apex to the 6 midpoints; rank 10]
+  NONMEMBER dual witness: VERIFIED (dual g=10 n=18 c=8 y.rhs=1)
+  minor MEMBER witnesses: 4/4 VERIFIED [orbit_representatives]
+  orbit accounting: {'total_single_element_minors': 36, 'note': '18 deletions + 18 contractions dedupe under Aut(G)=S_4 (two edge-orbits: 12 subdivision-edges = flags of K4, 6 apex-edges) x {delete, contract} into exactly 4 isomorphism classes of sizes 12+12+6+6. Testing one representative per class certifies all 36 by symmetry.'}
+  => minor-closedness (Prop 7.2): every proper minor is a member; with the dual witness, this matroid is an EXCLUDED MINOR for M_3.
+
+### find3  graph6=I?`FF_{F_  [10V/17E rank 9; non-bipartite, non-planar, no base+apex decomposition; Aut C2xC2]
+  NONMEMBER dual witness: VERIFIED (dual g=9 n=17 c=8 y.rhs=1)
+  minor MEMBER witnesses: 34/34 VERIFIED [all_one_element_minors]
+  => minor-closedness (Prop 7.2): every proper minor is a member; with the dual witness, this matroid is an EXCLUDED MINOR for M_3.
+
+### find4  graph6=I?B@nRWN?  [10V/17E rank 9; non-bipartite, non-planar; Aut C2xC2]
+  NONMEMBER dual witness: VERIFIED (dual g=9 n=17 c=8 y.rhs=1)
+  minor MEMBER witnesses: 34/34 VERIFIED [all_one_element_minors]
+  => minor-closedness (Prop 7.2): every proper minor is a member; with the dual witness, this matroid is an EXCLUDED MINOR for M_3.
+
+### find5  graph6=ICQf@pSF_  [10V/17E rank 9; non-bipartite, non-planar; Aut C2]
+  NONMEMBER dual witness: VERIFIED (dual g=9 n=17 c=8 y.rhs=1)
+  minor MEMBER witnesses: 34/34 VERIFIED [all_one_element_minors]
+  => minor-closedness (Prop 7.2): every proper minor is a member; with the dual witness, this matroid is an EXCLUDED MINOR for M_3.
+
+### K35_anchor  graph6=None  [K_{3,5}: the published EGFS excluded minor (their Thm 1.9); dual nonmember witness included as pipeline anchor only]
+  NONMEMBER dual witness: VERIFIED (dual g=7 n=15 c=8 y.rhs=1)
+
+========================================================================================
+Pairwise independence: each find's proper minors are all members while every find is a nonmember; hence no find contains another as a minor.
+RESULT: PASS
+========================================================================================
