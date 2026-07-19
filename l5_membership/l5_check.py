@@ -1,25 +1,21 @@
 #!/usr/bin/env python3
-# ============================================================================================
-# l5_check.py -- SELF-CONTAINED machine-verifiable checker for the claim:
-#
-#   "The graphic matroids M(K_{3,5}), M(G_1), M(G_2) -- the three known excluded minors
-#    of M_3 with recorded ell=5 data -- all lie in the class M_5 of
-#    Engel-de Gaay Fortman-Schreieder (arXiv:2507.15704 v3, Def 8.3):
-#       K_{3,5}  (8V/15E, rank 7)
-#       G_1      H?zTbbo      (9V/16E,  rank 8)
-#       G_2      J??FCpSJFw?  (11V/18E, rank 10)"
-#
-# WHAT IS VERIFIED, for each system, with NOTHING but integer linear algebra mod 5:
-#   (0) BINDING: the realization A carried by the witness file is verified to be a
-#       reduced oriented incidence matrix OF THE NAMED GRAPH (graph identities embedded
-#       in THIS FILE; explicit isomorphism found and verified edge-by-edge).
-#   (1) MEMBER: a primal witness x for the FULL Albanese membership system at ell = 5
-#       (Vn = 5^8 = 390,625 vertices, rebuilt from A alone) with Clo.x = 0 and color
-#       profile identically 1  =>  the matroid IS in M_5.
-#
-# This checker is the same design as ../m3_excluded_minors_v2/m3_check.py, with ell = 5.
-# REQUIREMENTS: python3 + numpy.   USAGE: python3 l5_check.py   (well under 1 GB, seconds)
-# ============================================================================================
+"""Verify the membership certificates at ell = 5 for the three M_3 excluded
+minors for which the accompanying note reports ell = 5 computations:
+
+    M(K_{3,5})  (8V/15E,  rank 7)
+    M(G_1)      H?zTbbo      (9V/16E,  rank 8)
+    M(G_2)      J??FCpSJFw?  (11V/18E, rank 10)
+
+Each is shown to lie in the class M_5 of Engel-de Gaay Fortman-Schreieder
+(arXiv:2507.15704v3, Def. 8.3). For each graph the script first identifies the
+stored realization with the named graph (graph6 or edge list embedded here;
+explicit isomorphism verified edge by edge), then reconstructs the full
+5^8 = 390,625-vertex Albanese membership system from the realization and verifies
+that the stored primal certificate solves the closedness equations with color
+profile identically 1. Same design as m3_check.py, with ell = 5.
+
+Requirements: Python 3 and numpy.   Usage: python3 l5_check.py   (a few seconds).
+"""
 import os, sys
 import numpy as np
 
@@ -189,21 +185,21 @@ def check_member(fn):
 
 def main():
     P("=" * 88)
-    P("Membership certificates at ell = 5 (EGFS arXiv:2507.15704v3 Def 8.3): "
-      "K_{3,5}, G_1, G_2 in M_5")
+    P("Membership certificates at l = 5: M(K_{3,5}), M(G_1), M(G_2) in M_5 "
+      "(EGFS arXiv:2507.15704v3, Def. 8.3)")
     P("=" * 88)
     all_ok = True
     for key in ("K35", "G1", "G2"):
         spec = EMBED[key]
-        P(f"\n### {spec['label']}  ({spec.get('graph6', 'K_{3,5} bipartite edge list')})")
+        P(f"\n{spec['label']}" + (f"  (graph6 {spec['graph6']})" if 'graph6' in spec else ""))
         ok, A, det = check_member(os.path.join(HERE, spec["file"]))
         bok, bdet = verify_binding(spec, A, 5)
-        P(f"  BINDING A <-> {spec['label']}: {'VERIFIED' if bok else '*** FAIL ***'} ({bdet})")
-        st = 'VERIFIED: MEMBER of M_5' if ok else '*** FAIL ***'
-        P(f"  full-system primal witness ({det}): {st}")
+        P(f"  graph identification: {'verified' if bok else 'FAILED'} ({bdet})")
+        st = 'VERIFIED: MEMBER of M_5' if ok else 'FAILED'
+        P(f"  full-system membership certificate ({det}): {st}")
         all_ok &= ok and bok
     P("\n" + "=" * 88)
-    P("RESULT: " + ("PASS" if all_ok else "*** FAIL ***"))
+    P("RESULT: " + ("PASS" if all_ok else "FAIL"))
     P("=" * 88)
     sys.exit(0 if all_ok else 2)
 

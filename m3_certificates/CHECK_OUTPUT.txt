@@ -1,0 +1,42 @@
+========================================================================================
+Certificates for five excluded minors of the class M_3 (EGFS arXiv:2507.15704v3, Def. 8.3), with M(K_{3,5}) as a reference case
+========================================================================================
+
+G_1  (graph6 H?zTbbo)
+  graph identification: verified (isomorphism verified (9V/16E))
+  nonmembership certificate: verified (dual g=8 n=16 c=8 y.rhs=1)
+  minor coverage: all 32 single-element minors verified, via the 24 automorphisms of the graph (computed here).
+  conclusion: G_1 is an excluded minor of M_3.
+
+G_2  (graph6 J??FCpSJFw?)
+  graph identification: verified (isomorphism verified (11V/18E))
+  nonmembership certificate: verified (dual g=10 n=18 c=8 y.rhs=1)
+  minor coverage: all 36 single-element minors verified, via the 24 automorphisms of the graph (computed here).
+  conclusion: G_2 is an excluded minor of M_3.
+
+G_3  (graph6 I?`FF_{F_)
+  graph identification: verified (isomorphism verified (10V/17E))
+  nonmembership certificate: verified (dual g=9 n=17 c=8 y.rhs=1)
+  minor coverage: all 34 single-element minors verified.
+  conclusion: G_3 is an excluded minor of M_3.
+
+G_4  (graph6 I?B@nRWN?)
+  graph identification: verified (isomorphism verified (10V/17E))
+  nonmembership certificate: verified (dual g=9 n=17 c=8 y.rhs=1)
+  minor coverage: all 34 single-element minors verified.
+  conclusion: G_4 is an excluded minor of M_3.
+
+G_5  (graph6 ICQf@pSF_)
+  graph identification: verified (isomorphism verified (10V/17E))
+  nonmembership certificate: verified (dual g=9 n=17 c=8 y.rhs=1)
+  minor coverage: all 34 single-element minors verified.
+  conclusion: G_5 is an excluded minor of M_3.
+
+M(K_{3,5})
+  graph identification: verified (isomorphism verified (8V/15E))
+  nonmembership certificate: verified (dual g=7 n=15 c=8 y.rhs=1)
+
+========================================================================================
+Each of G_1..G_5 is a nonmember of M_3 whose single-element minors are all members; hence none contains another as a minor.
+RESULT: PASS
+========================================================================================

@@ -1,50 +1,35 @@
 #!/usr/bin/env python3
-# ============================================================================================
-# m3_check.py -- SELF-CONTAINED machine-verifiable checker for the claim:
-#
-#   "The graphic matroids of FIVE graphs are EXCLUDED MINORS for the class M_3 of
-#    Engel-de Gaay Fortman-Schreieder (arXiv:2507.15704 v3, Def 8.3 / Prop 8.11):
-#       find1  H?zTbbo      (9V/16E,  rank 8:  Q_3 + one-sided apex)
-#       find2  J??FCpSJFw?  (11V/18E, rank 10: subdivided K_4 + apex to midpoints)
-#       find3  I?`FF_{F_    (10V/17E, rank 9)
-#       find4  I?B@nRWN?    (10V/17E, rank 9)
-#       find5  ICQf@pSF_    (10V/17E, rank 9)"
-#   (+ K_{3,5} anchor: the published EGFS excluded minor, dual witness only.)
-#
-# WHAT IS VERIFIED, for each find, with NOTHING but integer linear algebra mod 3:
-#   (0) BINDING: the realization A carried by each parent witness file is verified to be
-#       a reduced oriented incidence matrix OF THE NAMED GRAPH: the graph6 strings are
-#       embedded in THIS FILE (not read from any data file), decoded from scratch, and an
-#       explicit vertex bijection between the support graph of A and the decoded graph is
-#       found and verified edge-by-edge. Minor realizations are NOT trusted either: for
-#       every single-element minor the checker DERIVES the realization from the parent A
-#       (column deletion, resp. pivot-and-delete contraction) and requires the stored
-#       minor realization to have the identical GF(3) row space -- or, where the stored
-#       file carries its own labeling, to be a reduced oriented incidence matrix of a
-#       graph EXPLICITLY ISOMORPHIC to the combinatorially derived minor graph (the
-#       isomorphism is found and verified edge-by-edge; matroids of isomorphic graphs
-#       are isomorphic, and M_3-status is isomorphism-invariant).
-#   (1) NONMEMBER: a Farkas dual witness y with y^T M = 0 and y . rhs != 0 for the
-#       Albanese membership system of the candidate  =>  the matroid is NOT in M_3;
-#   (2) MEMBER, for one-element minors: a primal witness x with Clo.x = 0 and color
-#       profile identically 1  =>  the minor IS in M_3.
-#       - finds 3/4/5: ALL 34 one-element minors, coverage verified by matching every
-#         derived (operation, edge) minor to a verified witness file;
-#       - finds 1/2:   the checker COMPUTES Aut(G) (all automorphisms, from scratch) and
-#         the orbits of Aut(G) x {delete, contract} on single-element minors, then
-#         requires a verified, row-space-matched witness for at least one representative
-#         of EVERY orbit class. Isomorphic matroids have equal M_3-status, so this
-#         certifies all 32 (resp. 36) minors.
-#   (3) MINIMALITY LOGIC (mathematical, no computation): M_3 is minor-closed
-#       (EGFS Prop 7.2), so if every 1-element minor is a member, every proper minor
-#       is; with (1), the matroid is minor-minimal not-in-M_3 = an excluded minor.
-#       The same fact shows the five finds are pairwise independent.
-#
-# The Albanese system is REBUILT from A alone (cycle-space coordinates: nullspace basis
-# N with identity on free columns, color-s generator g_s = column s of N, edge (s,w):
-# w -> w + g_s, edge index e = s*Vn + w).
-# REQUIREMENTS: python3 + numpy.   USAGE: python3 m3_check.py
-# ============================================================================================
+"""Verify the certificates for five excluded minors of the class M_3 of
+Engel-de Gaay Fortman-Schreieder (arXiv:2507.15704v3, Def. 8.3 / Prop. 8.11):
+
+    G_1  H?zTbbo      (9V/16E,  rank 8)
+    G_2  J??FCpSJFw?  (11V/18E, rank 10)
+    G_3  I?`FF_{F_    (10V/17E, rank 9)
+    G_4  I?B@nRWN?    (10V/17E, rank 9)
+    G_5  ICQf@pSF_    (10V/17E, rank 9)
+
+together with M(K_{3,5}) as a reference case. For each graph the script:
+
+  1. identifies the stored realization with the stated graph -- the graph6
+     strings are embedded below and decoded here, and an explicit vertex
+     bijection to the support graph of the realization is verified edge by edge;
+  2. verifies a dual certificate of nonmembership in M_3 (a left-kernel vector y
+     with y^T M = 0 and y . rhs != 0 for the Albanese membership system);
+  3. verifies primal membership certificates covering every single-element
+     deletion and contraction -- for G_3, G_4, G_5 all 34 individually; for
+     G_1, G_2 by automorphism-orbit representatives, with Aut(G) and its edge
+     orbits computed here. Each stored minor certificate is matched to a
+     realization reconstructed from the parent, by equal row space or by an
+     explicit graph isomorphism.
+
+Since M_3 is minor-closed (EGFS Prop. 7.2), membership of every single-element
+minor gives membership of every proper minor; with the nonmembership certificate,
+each graph is an excluded minor, and the five are pairwise incomparable. The
+membership systems are reconstructed from the realizations alone; the
+verification does not use the search or solver that found the certificates.
+
+Requirements: Python 3 and numpy.   Usage: python3 m3_check.py
+"""
 import os, sys, json
 import numpy as np
 
@@ -61,6 +46,9 @@ EMBED = {
     "K35_anchor": {"edges": [(i, 3 + j) for i in range(3) for j in range(5)],
                    "nV": 8, "nE": 15},
 }
+
+DISPLAY = {"find1": "G_1", "find2": "G_2", "find3": "G_3", "find4": "G_4",
+           "find5": "G_5", "K35_anchor": "M(K_{3,5})"}
 
 def P(*a):
     print(*a); sys.stdout.flush()
@@ -293,21 +281,23 @@ def edge_orbits(nv, E, ncols, col_edges):
 
 def run_find(F, ell=3):
     name = F["name"]
-    P(f"\n### {name}  graph6={F.get('graph6')}  [{F.get('description','')}]")
+    label = DISPLAY.get(name, name)
+    g6 = F.get("graph6")
+    P(f"\n{label}" + (f"  (graph6 {g6})" if g6 else ""))
     all_ok = True
 
     # manifest graph6 must agree with the embedded ground truth
     if "graph6" in EMBED[name] and F.get("graph6") != EMBED[name]["graph6"]:
-        P(f"  *** FAIL *** manifest graph6 disagrees with checker-embedded graph6")
+        P("  FAILED: manifest graph6 disagrees with the graph6 embedded in this checker")
         return False
 
     ok, A_parent, det = check_file(os.path.join(HERE, "witnesses", F["dual"]))
     bok, bdet = verify_binding(name, A_parent, ell)
-    P(f"  BINDING A <-> {name}: {'VERIFIED' if bok else '*** FAIL ***'} ({bdet})")
-    P(f"  NONMEMBER dual witness: {'VERIFIED' if ok else '*** FAIL ***'} ({det})")
+    P(f"  graph identification: {'verified' if bok else 'FAILED'} ({bdet})")
+    P(f"  nonmembership certificate: {'verified' if ok else 'FAILED'} ({det})")
     all_ok &= ok and bok
     if not bok:
-        P("  (skipping minor coverage: parent binding failed)")
+        P("  (skipping minor coverage: identification failed)")
         return False
     if not F["minors"]:
         return all_ok
@@ -318,7 +308,7 @@ def run_find(F, ell=3):
         ok, A_m, det = check_file(os.path.join(HERE, "witnesses", m["file"]))
         all_ok &= ok
         if not ok:
-            P(f"  minor {m['file']}: *** FAIL *** ({det})")
+            P(f"  minor certificate {m['file']}: FAILED ({det})")
         stored.append((m["file"], A_m, ok, support_graph(A_m, ell)))
 
     g, n = A_parent.shape
@@ -350,47 +340,39 @@ def run_find(F, ell=3):
         miss = [(op, e) for op in ("delete", "contract") for e in range(n)
                 if not covered(op, e)]
         if miss:
-            P(f"  *** FAIL *** minors not covered by any verified witness: {miss}")
+            P(f"  FAILED: single-element minors not covered by a verified certificate: {miss}")
             all_ok = False
         else:
-            P(f"  minor COVERAGE: all {2*n} one-element minors matched to verified witnesses")
-            P(f"    (row-space-identical to realizations derived from the parent A).")
+            P(f"  minor coverage: all {2*n} single-element minors verified.")
     elif F["minor_scheme"] == "orbit_representatives":
         naut, orbits = edge_orbits(nv, sorted(E_sup), n, col_edges)
-        P(f"  |Aut| = {naut} (computed here), edge orbits: sizes {[len(o) for o in orbits]}")
         bad = []
         for orb in orbits:
             for op in ("delete", "contract"):
                 if not any(covered(op, e) for e in orb):
                     bad.append((op, f"orbit{orbits.index(orb)}"))
         if bad:
-            P(f"  *** FAIL *** orbit classes without a verified representative: {bad}")
+            P(f"  FAILED: orbit classes without a verified representative: {bad}")
             all_ok = False
         else:
-            tot = 2 * n
-            P(f"  minor COVERAGE: every Aut-orbit class (delete and contract, each orbit)")
-            P(f"    has a verified representative, matched to the internally derived minor")
-            P(f"    by row-space equality or explicit graph isomorphism; isomorphic matroids")
-            P(f"    have equal M_3-status, so all {tot} one-element minors are certified.")
-    nm = sum(1 for t in stored if t[2])
-    P(f"  minor MEMBER witnesses: {nm}/{len(stored)} VERIFIED [{F['minor_scheme']}]")
-    if F.get("orbit_accounting"):
-        P(f"  orbit accounting (manifest note): {F['orbit_accounting']['note'][:80]}...")
-    P("  => minor-closedness (Prop 7.2): every proper minor is a member; "
-      "with the dual witness, this matroid is an EXCLUDED MINOR for M_3.")
+            P(f"  minor coverage: all {2*n} single-element minors verified, via the "
+              f"{naut} automorphisms of the graph (computed here).")
+    if all_ok:
+        P(f"  conclusion: {label} is an excluded minor of M_3.")
     return all_ok
 
 def main():
     man = json.load(open(os.path.join(HERE, "data", "manifest.json")))
     P("=" * 88)
-    P(man["title"]); P(man["adjudication"]); P("=" * 88)
+    P(man["title"])
+    P("=" * 88)
     all_ok = True
     for F in man["finds"]:
         all_ok &= run_find(F)
     P("\n" + "=" * 88)
-    P("Pairwise independence: each find's proper minors are all members while every "
-      "find is a nonmember; hence no find contains another as a minor.")
-    P("RESULT: " + ("PASS" if all_ok else "*** FAIL ***"))
+    P("Each of G_1..G_5 is a nonmember of M_3 whose single-element minors are all "
+      "members; hence none contains another as a minor.")
+    P("RESULT: " + ("PASS" if all_ok else "FAIL"))
     P("=" * 88)
     sys.exit(0 if all_ok else 2)
 

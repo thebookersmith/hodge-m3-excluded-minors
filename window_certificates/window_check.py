@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 # ============================================================================================
-# window_check.py -- SELF-CONTAINED checker for SOCLE-WINDOW Farkas certificates of
-# NON-membership in the EGFS classes M_ell (arXiv:2507.15704v3, Def 8.3), for systems
-# far too large to materialize:
+# window_check.py -- checker for socle-window certificates of nonmembership in the
+# EGFS classes M_ell (arXiv:2507.15704v3, Def. 8.3), for two systems too large to
+# construct directly:
 #
 #     K_{3,9} at ell=5:  corank 16, full system has 5^16 = 152,587,890,625 vertices
 #     K_8     at ell=3:  corank 21, full system has 3^21 =  10,460,353,203 vertices
 #
-# REQUIREMENTS: python3 + numpy.  USAGE: python3 window_check.py
-# No other file from the producing repository is needed: this file re-implements every
-# ingredient from first principles and rebuilds all data from the edge lists below.
+# Requirements: Python 3 and numpy.  Usage: python3 window_check.py
+# The checker needs no other file from the repository: it rebuilds all data from the
+# edge lists below and reconstructs each realization from first principles.
 #
 # --------------------------------------------------------------------------------------------
-# WHAT A WITNESS IS, AND WHY THE WINDOW IDENTITY PROVES NON-MEMBERSHIP
-# (the function <-> element dictionary; cf. the adjudicated window dictionary lemma)
+# What a certificate is, and why the window identity proves nonmembership
+# (the correspondence between window-ring identities and full-system dual certificates)
 #
 # The Albanese membership system for a graph G with reduced oriented incidence A (g x n
 # over F_ell) lives on the vertex group V = F_ell^c (c = corank): writing N for a basis
@@ -34,16 +34,16 @@
 #     = prod_i t_i^{ell-1} =: t^socle  (the socle monomial), because
 #     (x^ell - 1)/(x - 1) = t^{ell-1} in F_ell[t]/(t^ell);
 #   . therefore the per-edge identity (*) -- "this function of w is the constant -b_s" --
-#     is EXACTLY the ring identity
+#     is precisely the ring identity
 #     sum_k A[k,s] * (x^{-g_s} - 1) * a_k^  +  b_s * t^socle  =  0   in R.        (**)
 #
 # WINDOW.  If every a_k^ is supported on t-monomials of degree >= (ell-1)c - D (the
 # "socle window", depth D), then so is every term of (**): multiplication by
 # (x^{-g} - 1) = prod_i (1+t_i)^{(-g)_i mod ell} - 1 never LOWERS any t-exponent.  Hence
-# (**) can be checked ENTIRELY inside the window -- a finite computation of size
+# (**) can be checked entirely inside the window -- a finite computation of size
 # (number of window monomials), independent of ell^c.  A verified (**) for all s, plus
-# sum_s b_s != 0, yields a genuine full-system Farkas dual via the dictionary read in
-# reverse, so the graph is NOT in M_ell.  No step of this argument requires evaluating
+# sum_s b_s != 0, yields a full-system dual certificate via the correspondence read in
+# reverse, so the graph is not in M_ell.  No step of this argument requires evaluating
 # any function on the ell^c vertices.
 #
 # COORDINATES USED IN THE FILES.  Window monomials are stored as DEFICIENCY tuples
@@ -54,13 +54,12 @@
 # because (1+t_i)^{gamma_i} t_i^{alpha_i} = sum_{d_i} C(gamma_i, d_i) t_i^{alpha_i+d_i}
 # and exponents above ell-1 vanish (t_i^ell = 0) -- i.e. negative deficiencies are dropped.
 #
-# PROVENANCE CHAIN.  For each claim this checker (1) rebuilds the incidence matrix from
-# the EDGE LIST EMBEDDED BELOW, (2) row-reduces it to the canonical realization A by
-# plain Gauss-Jordan (leftmost-pivot RREF, identical algorithm to the producing code),
-# (3) REQUIRES it to equal the realization stored in the witness file, (4) recomputes
-# the cycle-space generators, and (5) verifies (**) monomial-by-monomial and
-# sum_s b_s != 0.  Nothing is trusted from the witness file except the coefficients
-# being checked.
+# For each claim the checker (1) rebuilds the incidence matrix from the edge list
+# embedded below, (2) row-reduces it to the realization A by plain Gauss-Jordan
+# (leftmost-pivot RREF), (3) requires it to equal the realization stored in the witness
+# file, (4) recomputes the cycle-space generators, and (5) verifies (**) monomial by
+# monomial together with sum_s b_s != 0.  The only data taken from the witness file are
+# the certificate coefficients being checked.
 # ============================================================================================
 import os, sys
 import numpy as np
@@ -70,13 +69,13 @@ from itertools import product as iproduct
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 CLAIMS = [
-    {"name": "K_{3,9} is NOT in M_5   (the p=5 non-membership underlying Engel-Schreieder "
-             "Thm 1.7; witness depth 5)",
+    {"name": "K_{3,9} is not in M_5   (the p=5 nonmembership underlying Engel-Schreieder "
+             "Thm 1.7; certificate depth 5)",
      "file": "witnesses/K39_ell5_windowD5_dual.npz",
      "ell": 5,
      "edges": [(i, 3 + j) for i in range(3) for j in range(9)],
      "nverts": 12},
-    {"name": "K_8 is NOT in M_3   (depth-3 window witness at corank 21)",
+    {"name": "K_8 is not in M_3   (depth-3 window certificate at corank 21)",
      "file": "witnesses/K8_ell3_windowD3_dual.npz",
      "ell": 3,
      "edges": [(i, j) for i in range(8) for j in range(i + 1, 8)],
@@ -172,7 +171,7 @@ def check_claim(cl):
     c = n - g
     gens = cycle_generators(A, ell)
     P(f"  corank c={c}: full system would have {ell}^{c} = {ell**c:,} vertices "
-      f"(never materialized); window monomials: {len(mons)}")
+      f"(not constructed); window monomials: {len(mons)}")
     socle = tuple([0] * c)
     ok_all = True
     for s in range(n):
@@ -196,7 +195,7 @@ def check_claim(cl):
     P(f"  ring identity (**) for all {n} edges: {'PASS' if ok_all else 'FAIL'}")
     P(f"  sum_s b_s = {sb} (must be nonzero): {'PASS' if sb != 0 else 'FAIL'}")
     verdict = ok_all and sb != 0
-    P(f"  => {'VERIFIED: NOT in M_%d (window Farkas dual)' % ell if verdict else '*** WITNESS INVALID ***'}")
+    P(f"  => {'verified: not in M_%d (window dual certificate)' % ell if verdict else 'CERTIFICATE INVALID'}")
     return verdict
 
 def main():
@@ -204,7 +203,7 @@ def main():
     for cl in CLAIMS:
         ok &= check_claim(cl)
     P("=" * 88)
-    P("RESULT: " + ("PASS" if ok else "*** FAIL ***"))
+    P("RESULT: " + ("PASS" if ok else "FAIL"))
     sys.exit(0 if ok else 2)
 
 main()

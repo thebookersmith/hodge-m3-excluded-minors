@@ -22,8 +22,7 @@ SOFTWARE.
 
 ---
 
-Scope note: this MIT license covers the verification code and certificate data
-in this repository (m3_excluded_minors_v2/, window_certificates/). The
-accompanying note newminor_note.pdf is (c) 2026 Booker Smith, all rights
-reserved (it is distributed here for reference; a preprint/journal version
-governs its own terms).
+Scope note: this MIT License covers the verification code and certificate data in
+this repository, including the directories m3_certificates/, window_certificates/,
+and l5_membership/. The accompanying note newminor_note.pdf is (c) 2026 Booker
+Smith and is not licensed under the MIT License.
