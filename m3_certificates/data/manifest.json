@@ -7,7 +7,7 @@
   {
    "name": "find1",
    "graph6": "H?zTbbo",
-   "description": "K_{4,5} minus perfect matching = Q_3 + one-sided apex; rank 8",
+   "description": "K_{4,5} minus a 4-edge matching = Q_3 + one-sided apex; rank 8",
    "dual": "find1_dual.npz",
    "minor_scheme": "orbit_representatives",
    "minors": [
