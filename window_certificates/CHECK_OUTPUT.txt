@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------
-CLAIM: K_{3,9} is NOT in M_5   (Engel-Schreieder Thm 1.7 instance, p=5; witness depth exactly 5 -- depths <= 4 are provably empty)
+CLAIM: K_{3,9} is NOT in M_5   (the p=5 non-membership underlying Engel-Schreieder Thm 1.7; witness depth 5)
   realization rebuilt from edge list (12V/27E): g=11 n=27; matches witness file: YES
   corank c=16: full system would have 5^16 = 152,587,890,625 vertices (never materialized); window monomials: 20333
   ring identity (**) for all 27 edges: PASS

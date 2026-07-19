@@ -23,13 +23,18 @@ Every witness file in `witnesses/` is self-contained (`kind`, `ell`, `witness`, 
 integer realization `A`); the checker rebuilds each Albanese membership system from `A`
 alone and verifies the witness with integer matrix–vector products mod 3 — no rank
 engine, no external libraries, no trust in the software that *found* the witnesses.
+Graph identity and minor coverage are verified inside the checker as well: the graph6
+strings are embedded in `m3_check.py` itself, each parent realization is verified to be
+a reduced oriented incidence matrix of the named graph by an explicit isomorphism, each
+minor realization is matched against a realization *derived in the checker* from the
+parent (identical row space, or explicit isomorphism of the minor graphs), and coverage
+of **all** single-element deletions and contractions is confirmed — with the
+automorphism groups and edge orbits of G₁/G₂ computed from scratch in the checker, not
+quoted from the manifest.
 
 Layout: `data/manifest.json` (claims + orbit accounting), `witnesses/*.npz`,
-`m3_check.py`, `CHECK_OUTPUT.txt`. Companion summary: `..\fivefinds_summary.md`.
-Predecessor bundle (finds #1–#2 only, xh-format witnesses): `..\newminor_certificate\`
-— its witnesses were converted to the unified format here, with every conversion
-re-verified at build time (`code\mfx_bundle_build.py`).
+`m3_check.py`, `CHECK_OUTPUT.txt` (archived reference run).
 
-Companion bundle for claims BEYOND materializable scale (K₃,₉ ∉ M₅ at 5¹⁶, K₈ ∉ M₃ at
-3²¹, verified through the socle-window ring identity with its own self-contained
-checker): `..\window_certificates\`.
+Companion bundles: `../window_certificates/` (claims beyond materializable scale:
+K₃,₉ ∉ M₅ at 5¹⁶, K₈ ∉ M₃ at 3²¹, via the socle-window ring identity) and
+`../l5_membership/` (ℓ = 5 full-system membership witnesses).

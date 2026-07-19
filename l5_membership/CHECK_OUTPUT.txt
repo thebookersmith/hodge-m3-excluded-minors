@@ -1,0 +1,19 @@
+========================================================================================
+Membership certificates at ell = 5 (EGFS arXiv:2507.15704v3 Def 8.3): K_{3,5}, G_1, G_2 in M_5
+========================================================================================
+
+### M(K_{3,5})  (K_{3,5} bipartite edge list)
+  BINDING A <-> M(K_{3,5}): VERIFIED (isomorphism verified (8V/15E))
+  full-system primal witness (g=7 n=15 c=8 Vn=390625): VERIFIED: MEMBER of M_5
+
+### M(G_1)  (H?zTbbo)
+  BINDING A <-> M(G_1): VERIFIED (isomorphism verified (9V/16E))
+  full-system primal witness (g=8 n=16 c=8 Vn=390625): VERIFIED: MEMBER of M_5
+
+### M(G_2)  (J??FCpSJFw?)
+  BINDING A <-> M(G_2): VERIFIED (isomorphism verified (11V/18E))
+  full-system primal witness (g=10 n=18 c=8 Vn=390625): VERIFIED: MEMBER of M_5
+
+========================================================================================
+RESULT: PASS
+========================================================================================

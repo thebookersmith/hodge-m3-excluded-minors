@@ -70,8 +70,8 @@ from itertools import product as iproduct
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 CLAIMS = [
-    {"name": "K_{3,9} is NOT in M_5   (Engel-Schreieder Thm 1.7 instance, p=5; "
-             "witness depth exactly 5 -- depths <= 4 are provably empty)",
+    {"name": "K_{3,9} is NOT in M_5   (the p=5 non-membership underlying Engel-Schreieder "
+             "Thm 1.7; witness depth 5)",
      "file": "witnesses/K39_ell5_windowD5_dual.npz",
      "ell": 5,
      "edges": [(i, 3 + j) for i in range(3) for j in range(9)],

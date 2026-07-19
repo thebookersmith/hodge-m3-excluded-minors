@@ -417,7 +417,7 @@
   {
    "name": "K35_anchor",
    "graph6": null,
-   "description": "K_{3,5}: the published EGFS excluded minor (their Thm 1.9); dual nonmember witness included as pipeline anchor only",
+   "description": "K_{3,5}: the published EGFS excluded minor (their Prop 8.11); dual nonmember witness included as pipeline anchor only",
    "dual": "K35_anchor_dual.npz",
    "minor_scheme": "published_reference",
    "minors": []

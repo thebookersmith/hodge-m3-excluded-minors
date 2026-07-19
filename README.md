@@ -23,9 +23,11 @@ python3 m3_check.py
 
 Expected final line: `RESULT: PASS` (≈1 second, well under 1 GB of memory). This rebuilds
 each membership system from the embedded realizations and verifies, for each of the five
-graphs: a left-kernel certificate of non-membership, and explicit solutions certifying
-membership of every single-element deletion and contraction (minimality), plus the
-K₃,₅ anchor of [EGFS, Prop. 8.11].
+graphs: that the realization is a reduced oriented incidence matrix of the named graph
+(graph6 strings embedded in the checker; explicit isomorphism verified edge-by-edge), a
+left-kernel certificate of non-membership, and explicit solutions certifying membership
+of every single-element deletion and contraction (minimality; coverage and Aut-orbits
+verified inside the checker), plus the K₃,₅ anchor of [EGFS, Prop. 8.11].
 
 ```
 cd window_certificates
@@ -35,8 +37,17 @@ python3 window_check.py
 Expected final line: `RESULT: PASS`. This verifies two further certificates at scales
 where the membership system cannot be materialized, via ring identities in
 F_ℓ[t₁..t_c]/(tᵢ^ℓ): **M(K₈) ∉ M₃** (corank 21; the full system would have 3²¹ vertices)
-and **M(K₃,₉) ∉ M₅** (corank 16; 5¹⁶ vertices) — the p = 5 instance of
-[arXiv:2606.31894], Theorem 1.7.
+and **M(K₃,₉) ∉ M₅** (corank 16; 5¹⁶ vertices) — the non-membership underlying the
+p = 5 case of [arXiv:2606.31894], Theorem 1.7.
+
+```
+cd l5_membership
+python3 l5_check.py
+```
+
+Expected final line: `RESULT: PASS`. This verifies the ℓ = 5 **membership** witnesses of
+the note's §4: M(K₃,₅), M(G₁), M(G₂) ∈ M₅, each by an explicit solution of the full
+5⁸-vertex membership system (`VERIFIED: MEMBER of M_5`).
 
 ## Contents
 
@@ -47,6 +58,8 @@ and **M(K₃,₉) ∉ M₅** (corank 16; 5¹⁶ vertices) — the p = 5 instance
 - `window_certificates/` — the beyond-scale certificates: window witnesses for K₈ (ℓ=3)
   and K₃,₉ (ℓ=5), checker (`window_check.py`), reference run, and a README with the
   depth-minimality context.
+- `l5_membership/` — the ℓ = 5 membership witnesses (K₃,₅, G₁, G₂ ∈ M₅) with their own
+  self-contained checker (`l5_check.py`) and reference run.
 
 ## License
 

@@ -6,8 +6,14 @@ written down:
 
 | claim | corank | full-system size | witness |
 |---|---|---|---|
-| **K₃,₉ ∉ M₅** (Engel–Schreieder Thm 1.7 instance, p=5) | 16 | 5¹⁶ = 152,587,890,625 vertices | depth-5 window dual (`K39_ell5_windowD5_dual.npz`) |
+| **K₃,₉ ∉ M₅** | 16 | 5¹⁶ = 152,587,890,625 vertices | depth-5 window dual (`K39_ell5_windowD5_dual.npz`) |
 | **K₈ ∉ M₃** | 21 | 3²¹ = 10,460,353,203 vertices | depth-3 window dual (`K8_ell3_windowD3_dual.npz`) |
+
+The K₃,₉ certificate gives the p = 5 non-membership underlying Theorem 1.7 of
+Engel–Schreieder (arXiv:2606.31894); the theorem's full nonzero-profile form then
+follows by their Cor. 2.10, K₃,₉ being biconnected. (K₈ ∉ M₃ also follows from
+M(K₇) ∉ M₃ [arXiv:2512.04902, Thm 1.2] together with minor-closedness; it is
+included here as a scale demonstration of the window method.)
 
 ## Verify
 
@@ -27,8 +33,10 @@ membership system (shift ↔ x^{−g}-multiplication; constant-1 ↔ the socle m
 window stability of the multiplication operator) — so non-membership follows without
 ever materializing ℓ^c vertices.
 
-Depth context (adjudicated theory): no Farkas dual of depth ≤ ℓ−1 exists for any graph
-(so depth 5 is minimal at ℓ=5, depth 3 at ℓ=3); for K₃,₉ the depths 2,3,4 additionally
-carry explicit GPU-verified infeasibility certificates (program archive,
-`mfx_witnesses\` / `gpu_lab`). Companion full-system bundle (five M₃ excluded minors,
-checkable directly): `..\m3_excluded_minors_v2\`.
+Depth context: for K₃,₉ at ℓ = 5, the depths 2, 3, and 4 additionally carry explicit
+infeasibility certificates (program archive; not part of this bundle), so depth 5 is
+minimal for this witness. A general lower bound on witness depth is deferred to a
+companion note.
+
+Companion bundles: `../m3_excluded_minors_v2/` (five M₃ excluded minors, full-system
+certificates) and `../l5_membership/` (ℓ = 5 membership witnesses).
